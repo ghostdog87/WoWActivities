@@ -1,14 +1,12 @@
+import { observer } from "mobx-react-lite";
 import { useState } from "react";
 import { Button, Form, Segment } from "semantic-ui-react";
-import { Activity } from "../../../app/models/activity";
+import { useStore } from "../../../app/stores/store";
 
-interface Props {
-  closeForm: () => void;
-  activity: Activity | undefined;
-  createOrEdit: (activity: Activity) => void;
-}
+export default observer(function ActivityForm() {
+  const { activityStore } = useStore();
+  const { selectedActivity, closeForm, createActivity, updateActivity, loading } = activityStore;
 
-export default function ActivityForm({ closeForm, activity: selectedActivity, createOrEdit }: Props) {
   const initialState = selectedActivity ?? {
     id: '',
     title: '',
@@ -22,7 +20,7 @@ export default function ActivityForm({ closeForm, activity: selectedActivity, cr
   const [activity, setActivity] = useState(initialState);
 
   function handleSubmit() {
-    createOrEdit(activity);
+    activity.id ? updateActivity(activity) : createActivity(activity);
   }
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -36,12 +34,12 @@ export default function ActivityForm({ closeForm, activity: selectedActivity, cr
         <Form.Input placeholder='Title' name="title" value={activity.title} onChange={handleInputChange} />
         <Form.TextArea placeholder='Description' name="description" value={activity.description} onChange={handleInputChange} />
         <Form.Input placeholder='Category' name="category" value={activity.category} onChange={handleInputChange} />
-        <Form.Input placeholder='Date' name="date" value={activity.date} onChange={handleInputChange} />
+        <Form.Input type='date' placeholder='Date' name="date" value={activity.date} onChange={handleInputChange} />
         <Form.Input placeholder='City' name="city" value={activity.city} onChange={handleInputChange} />
         <Form.Input placeholder='Venue' name="venue" value={activity.venue} onChange={handleInputChange} />
-        <Button onClick={handleSubmit} floated='right' positive type='submit' content='Submit' />
+        <Button loading={loading} onClick={handleSubmit} floated='right' positive type='submit' content='Submit' />
         <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
       </Form>
     </Segment>
   )
-}
+});
