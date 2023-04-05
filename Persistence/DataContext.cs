@@ -1,6 +1,7 @@
 ﻿using Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Persistence;
 public class DataContext : IdentityDbContext<AppUser>
@@ -10,4 +11,23 @@ public class DataContext : IdentityDbContext<AppUser>
     }
 
     public DbSet<Activity> Activities { get; set; }
+    public DbSet<ActivityAttendee> ActivityAttendees { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+        builder.Entity<ActivityAttendee>(x => x
+        .HasKey(a => new { a.AppUserId, a.ActivityId }));
+
+        builder.Entity<ActivityAttendee>()
+            .HasOne(u => u.AppUser)
+            .WithMany(u => u.Activities)
+            .HasForeignKey(x => x.AppUserId);
+
+        builder.Entity<ActivityAttendee>()
+            .HasOne(u => u.Activity)
+            .WithMany(u => u.Attendees)
+            .HasForeignKey(x => x.ActivityId);
+    }
 }
