@@ -129,6 +129,10 @@ export default class ActivityStore {
     this.loading = state;
   }
 
+  //changeHost = (host: string) => {
+  //  this.activityRegistry.set(this.selectedActivity!.id, this.selectedActivity!);
+  //}
+
   private setActivity = (activity: Activity) => {
     const user = store.userStore.user;
 
