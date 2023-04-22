@@ -129,10 +129,6 @@ export default class ActivityStore {
     this.loading = state;
   }
 
-  //changeHost = (host: string) => {
-  //  this.activityRegistry.set(this.selectedActivity!.id, this.selectedActivity!);
-  //}
-
   private setActivity = (activity: Activity) => {
     const user = store.userStore.user;
 
@@ -189,5 +185,17 @@ export default class ActivityStore {
     finally {
       runInAction(() => { this.loading = false; });
     }
+  }
+
+  updateActivitiesHostPicture = (pictureUrl: string) => {
+    const user = store.userStore.user;
+
+    this.activityRegistry.forEach((activity) => {
+      if (user && activity.hostUsername === user.username) {
+        activity.host!.image = pictureUrl;
+        var attendee = activity.attendees.find(x => x.username === user.username);
+        attendee!.image = pictureUrl;
+      }
+    })
   }
 }

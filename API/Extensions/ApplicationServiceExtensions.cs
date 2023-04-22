@@ -8,6 +8,8 @@ using Infrastucture.Security;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Application.Profiles;
+using Edit = Application.Profiles.Edit;
 
 namespace API.Extensions
 {
