@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { Activity, ActivityFormValues } from "../models/activity";
 import { PaginatedResult } from "../models/pagination";
-import { Photo, Profile } from "../models/profile";
+import { Photo, Profile, UserActivity } from "../models/profile";
 import { User, UserFormValues } from "../models/user";
 import { router } from "../router/Routes";
 import { store } from "../stores/store";
@@ -109,6 +109,7 @@ const Profiles = {
   updateProfile: (profile: Partial<Profile>) => request.put(`/profiles`, profile),
   updateFollowing: (username: string) => request.post(`/follow/${username}`, {}),
   listFollowings: (username: string, predicate: string) => request.get<Profile[]>(`/follow/${username}?predicate=${predicate}`),
+  listActivities: (username: string, predicate?: string) => request.get<UserActivity[]>(`/profiles/${username}/activities?predicate=${predicate}`),
 };
 
 const agent = {
