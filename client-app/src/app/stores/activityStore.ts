@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, reaction, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Activity, ActivityFormValues } from "../models/activity";
 import { format } from "date-fns";
@@ -14,19 +14,64 @@ export default class ActivityStore {
   loadingInitial = false;
   pagination: Pagination | null = null;
   pagingParams = new PagingParams();
+  filter = new Map().set("all", true);
 
   constructor() {
     makeAutoObservable(this);
+
+    reaction(
+      () => this.filter.keys(),
+      () => {
+        this.pagingParams = new PagingParams();
+        this.activityRegistry.clear();
+        this.loadActivities();
+      }
+    );
   }
 
   setPagingParams = (pagingParams: PagingParams) => {
     this.pagingParams = pagingParams;
   };
 
+  setFilter = (filter: string, value: string | Date) => {
+    const resetFilter = () => {
+      this.filter.forEach((value, key) => {
+        if (key !== "startDate") this.filter.delete(key);
+      });
+    };
+
+    switch (filter) {
+      case "all":
+        resetFilter();
+        this.filter.set("all", true);
+        break;
+      case "isGoing":
+        resetFilter();
+        this.filter.set("isGoing", true);
+        break;
+      case "isHost":
+        resetFilter();
+        this.filter.set("isHost", true);
+        break;
+      case "startDate":
+        this.filter.delete("startDate");
+        this.filter.set("startDate", value);
+        break;
+    }
+  };
+
   get axiosParams() {
     const params = new URLSearchParams();
     params.append("pageNumber", this.pagingParams.pageNumber.toString());
     params.append("pageSize", this.pagingParams.pageSize.toString());
+    this.filter.forEach((value, key) => {
+      if (key === "startDate") {
+        params.append(key, (value as Date).toISOString());
+      } else {
+        params.append(key, value);
+      }
+    });
+
     return params;
   }
 
