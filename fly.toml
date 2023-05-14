@@ -1,48 +1,44 @@
-# fly.toml app configuration file generated for wowactivities on 2023-05-11T01:00:21+03:00
+# fly.toml app configuration file generated for wowactivities on 2023-05-14T16:14:46+03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = "wowactivities"
-kill_signal = "SIGINT"
-kill_timeout = 5
-processes = []
 primary_region = "otp"
+kill_signal = "SIGINT"
+kill_timeout = "5s"
+
+[experimental]
+  auto_rollback = true
 
 [build]
   image = "ghostdog1987/wowactivities:latest"
 
 [env]
-  ASPNETCORE_URLS="http://+:8080"
-  Cloudinary__CloudName="dh9wcvah2"  
-  Cloudinary__ApiKey="229348772325644"
-
-[experimental]
-  allowed_public_ports = []
-  auto_rollback = true
+  ASPNETCORE_URLS = "http://+:8080"
+  Cloudinary__ApiKey = "229348772325644"
+  Cloudinary__CloudName = "dh9wcvah2"
 
 [[services]]
-  http_checks = []
+  protocol = "tcp"
   internal_port = 8080
   processes = ["app"]
-  protocol = "tcp"
-  script_checks = []
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
   [services.concurrency]
+    type = "connections"
     hard_limit = 25
     soft_limit = 20
-    type = "connections"
-
-  [[services.ports]]
-    force_https = true
-    handlers = ["http"]
-    port = 80
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
 
   [[services.tcp_checks]]
-    grace_period = "1s"
     interval = "15s"
-    restart_limit = 0
     timeout = "2s"
+    grace_period = "1s"
+    restart_limit = 0
