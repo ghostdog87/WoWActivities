@@ -36,10 +36,10 @@ namespace Application.Profiles
 
                 query = request.Predicate switch
                 {
-                    "past" => query.Where(x => x.Date <= DateTime.Now),
-                    "future" => query.Where(x => x.Date > DateTime.Now),
+                    "past" => query.Where(x => x.Date <= DateTime.UtcNow),
+                    "future" => query.Where(x => x.Date > DateTime.UtcNow),
                     "hosting" => query.Where(x => x.HostUsername == request.Username),
-                    _ => query.Where(x => x.Date > DateTime.Now),
+                    _ => query.Where(x => x.Date > DateTime.UtcNow),
                 };
 
                 var activites = await query.ToListAsync();

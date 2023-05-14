@@ -33,8 +33,13 @@ if (app.Environment.IsDevelopment())
 app.UseCors("CorsPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.MapControllers();
 app.MapHub<ChatHub>("/chat");
+app.MapFallbackToController("Index", "Fallback");
 
 using IServiceScope scope = app.Services.CreateScope();
 IServiceProvider services = scope.ServiceProvider;

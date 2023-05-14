@@ -1,0 +1,21 @@
+# fly.toml app configuration file generated for wowactivities on 2023-05-11T01:00:21+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "wowactivities"
+primary_region = "otp"
+
+[build]
+  image = "ghostdog1987/wowactivities:latest"
+
+[env]
+  ASPNETCORE_URLS="http://+:8080"
+  Cloudinary__CloudName="dh9wcvah2"  
+  Cloudinary__ApiKey="229348772325644"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true

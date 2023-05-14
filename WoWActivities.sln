@@ -11,27 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{B2757115-F223-4F5C-8AD5-C2E033004823}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "client-app", "client-app\", "{AB123F4D-3357-47A3-8693-0493178FE72F}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_50748"
-		Debug.AspNetCompiler.PhysicalPath = "client-app\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50748\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_50748"
-		Release.AspNetCompiler.PhysicalPath = "client-app\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50748\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "50748"
-		SlnRelativePath = "client-app\"
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastucture", "Infrastucture\Infrastucture.csproj", "{7ADA4CAB-848C-4F51-8F83-4BA7141C20EF}"
 EndProject
 Global
