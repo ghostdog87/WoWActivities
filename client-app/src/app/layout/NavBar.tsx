@@ -10,11 +10,11 @@ export default observer(function NavBar() {
     <Menu inverted fixed="top">
       <Container>
         <Menu.Item as={NavLink} to='/' header>
-          <img src="/assets/logo.png" alt="logo" style={{marginRight: '10px'}}/>
+          <img src="/assets/logo.png" alt="logo" style={{ marginRight: '10px' }} />
           WoWActivities
         </Menu.Item>
         <Menu.Item as={NavLink} to='/activities' name="Activities" />
-        <Menu.Item as={NavLink} to='/errors' name="Errors" />
+        {/* <Menu.Item as={NavLink} to='/errors' name="Errors" /> */}
         <Menu.Item>
           <Button as={NavLink} to='/createActivity' positive content="Create Activity" />
         </Menu.Item>
@@ -23,7 +23,7 @@ export default observer(function NavBar() {
           <Dropdown pointing='top left' text={user?.displayName}>
             <DropdownMenu>
               <DropdownItem as={Link} to={`/profiles/${user?.username}`} text='My Profile' icon='user' />
-              <DropdownItem onClick={logout} text='Logout' icon='power'/>
+              <DropdownItem onClick={logout} text='Logout' icon='power' />
             </DropdownMenu>
           </Dropdown>
         </Menu.Item>
