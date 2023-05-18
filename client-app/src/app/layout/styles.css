@@ -1,5 +1,12 @@
-body{
+body {
     background-color: #EAEAEA;
+    background-image: url(../../../public/zandalari-craft.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100vw;
+    height: 100vh;
 }
 
 .ui.inverted.top.fixed.menu {
