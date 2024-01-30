@@ -30,7 +30,7 @@ export default class ProfileStore {
     );
   }
 
-  setActiveTab = (activeTab: any) => {
+  setActiveTab = (activeTab: number) => {
     this.activeTab = activeTab;
   };
 
@@ -45,7 +45,7 @@ export default class ProfileStore {
     this.loadingProfile = true;
 
     try {
-      var profile = await agent.Profiles.get(username);
+      const profile = await agent.Profiles.get(username);
       runInAction(() => {
         this.profile = profile;
       });

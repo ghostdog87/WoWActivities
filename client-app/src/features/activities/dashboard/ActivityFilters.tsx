@@ -15,7 +15,7 @@ export default observer(function ActivityFilters() {
         <Menu.Item content="I'm hosting" active={filter.has('isHost')} onClick={() => setFilter('isHost', 'true')} />
       </Menu>
       <Header />
-      <Calendar onChange={(date: any) => setFilter('startDate', date as Date)} value={filter.get('startDate') || new Date()} />
+      <Calendar onChange={(date) => setFilter('startDate', date as Date)} value={filter.get('startDate') || new Date()} />
     </>
   );
 })

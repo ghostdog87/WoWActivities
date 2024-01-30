@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { SyntheticEvent, useState } from "react";
-import { Card, Header, Tab, Image, Grid, Button } from "semantic-ui-react";
+import { Card, Header, Image, Grid, Button, TabPane } from "semantic-ui-react";
 import PhotoUploadWidget from "../../app/common/imageUpload/PhotoUploadWidget";
 import { Photo } from "../../app/models/profile";
 import { useStore } from "../../app/stores/store";
@@ -25,7 +25,7 @@ export default observer(function ProfilePhotos() {
   }
 
   return (
-    <Tab.Pane>
+    <TabPane>
       <Grid>
         <Grid.Column width={16}>
           <Header floated='left' icon='image' content='Photos' />
@@ -70,8 +70,6 @@ export default observer(function ProfilePhotos() {
               )}
         </Grid.Column>
       </Grid>
-      
-
-    </Tab.Pane>
+    </TabPane>
   );
 })

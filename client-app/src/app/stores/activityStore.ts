@@ -35,7 +35,7 @@ export default class ActivityStore {
 
   setFilter = (filter: string, value: string | Date) => {
     const resetFilter = () => {
-      this.filter.forEach((value, key) => {
+      this.filter.forEach((_, key) => {
         if (key !== "startDate") this.filter.delete(key);
       });
     };
@@ -153,7 +153,7 @@ export default class ActivityStore {
 
       runInAction(() => {
         if (activity.id) {
-          let updatedActivity = { ...this.getActivity(activity.id), ...activity } as Activity;
+          const updatedActivity = { ...this.getActivity(activity.id), ...activity } as Activity;
           this.activityRegistry.set(activity.id, updatedActivity);
           this.selectedActivity = updatedActivity;
         }
@@ -256,7 +256,7 @@ export default class ActivityStore {
     this.activityRegistry.forEach((activity) => {
       if (user && activity.hostUsername === user.username) {
         activity.host!.image = pictureUrl;
-        var attendee = activity.attendees.find((x) => x.username === user.username);
+        const attendee = activity.attendees.find((x) => x.username === user.username);
         attendee!.image = pictureUrl;
       }
     });
