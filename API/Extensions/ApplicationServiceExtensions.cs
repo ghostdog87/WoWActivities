@@ -66,7 +66,7 @@ namespace API.Extensions
                     policy.AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
-                    .WithOrigins("http://localhost:3001");
+                    .WithOrigins("http://localhost:3001", "https://localhost:3001");
                 });
             });
             services.AddMediatR(typeof(List.Handler));

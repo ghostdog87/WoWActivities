@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@greatsumini/react-facebook-login": "^3.3.3",
     "@microsoft/signalr": "^8.0.0",
     "@types/node": "^20.11.11",
     "@types/react": "^18.0.0",
@@ -64,6 +65,7 @@
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "vite": "^5.0.12"
+    "vite": "^5.0.12",
+    "vite-plugin-mkcert": "^1.17.3"
   }
 }
